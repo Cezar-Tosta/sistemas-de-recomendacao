@@ -68,3 +68,22 @@ def getSimilares(usuario):
     similaridade.sort()
     similaridade.reverse()
     return similaridade
+
+# Vai calcular a nota que um usuário daria a um filme que não avaliou
+def getRecomendacoes(usuario):
+    totais = {}
+    somaSimilaridade={}
+    for outro in avaliacoes:
+        if outro == usuario: continue
+        similaridade = euclidiana(usuario, outro)
+        if similaridade == 0: continue
+        for item in avaliacoes[outro]:
+            if item not in avaliacoes[usuario]:
+                totais.setdefault(item, 0)
+                totais[item] += avaliacoes[outro][item] * similaridade
+                somaSimilaridade.setdefault(item, 0)
+                somaSimilaridade[item] += similaridade
+    rankings = [(total / somaSimilaridade[item], item) for item, total in totais.items()]
+    rankings.sort()
+    rankings.reverse()
+    return rankings
