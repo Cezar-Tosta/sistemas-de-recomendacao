@@ -1,3 +1,4 @@
-from recomendacao import euclidiana, avaliacoes 
+from recomendacao import euclidiana, avaliacoes, getSimilares
 
-print(euclidiana('Leonardo', 'Janaina'))
+print(euclidiana('Ana', 'Pedro'))
+print(getSimilares('Leonardo'))

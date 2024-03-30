@@ -59,4 +59,12 @@ def euclidiana(usuario1, usuario2):
         return 0
     soma = sum([pow(avaliacoes[usuario1][item] - avaliacoes[usuario2][item], 2)
                 for item in avaliacoes[usuario1] if item in avaliacoes[usuario2]])
-    return 1/(1+sqrt(soma))
+    return 1/(1+sqrt(soma)) #Quanto mais próximo de 1, mais similares
+
+# Similaridade de um usuário com os demais
+def getSimilares(usuario):
+    similaridade = [(euclidiana(usuario, outro), outro)
+                    for outro in avaliacoes if outro != usuario]
+    similaridade.sort()
+    similaridade.reverse()
+    return similaridade
