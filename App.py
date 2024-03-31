@@ -1,5 +1,8 @@
-from recomendacao import euclidiana, avaliacoes, getSimilares, getRecomendacoes
+from recomendacao import *
 
-print(avaliacoes['Star Trek'])
-print(getSimilares('Star Wars'))
-print(getRecomendacoes('Star Trek'))
+print(euclidiana(avaliacoesUsuario, 'Pedro', 'Janaina'))
+print(euclidiana(avaliacoesFilme, 'Star Wars', 'Star Trek'))
+print(getSimilares(avaliacoesUsuario, 'Pedro'))
+print(getSimilares(avaliacoesFilme, 'Star Wars'))
+print(getRecomendacoes(avaliacoesUsuario, 'Leonardo'))
+print(getRecomendacoes(avaliacoesFilme, 'Star Wars'))
