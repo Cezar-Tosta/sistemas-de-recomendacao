@@ -116,7 +116,7 @@ def getSimilares(base, usuario):
                     for outro in base if outro != usuario]
     similaridade.sort()
     similaridade.reverse()
-    return similaridade
+    return similaridade[0:30]
 
 # Vai calcular a nota que um usuário daria a um filme que não avaliou
 def getRecomendacoes(base, usuario):
@@ -135,4 +135,20 @@ def getRecomendacoes(base, usuario):
     rankings = [(total / somaSimilaridade[item], item) for item, total in totais.items()]
     rankings.sort()
     rankings.reverse()
-    return rankings
+    return rankings[0:30]
+
+# Função para carregar dados do MovieLens
+def carregaMovieLens(path='C:/ml-100k'):
+    filmes = {}
+    for linha in open('./ml-100k/u.item'):
+        (id, titulo) = linha.split('|')[0:2]
+        filmes[id] = titulo
+    #print(filmes)
+
+    base = {}
+    for linha in open('./ml-100k/u.data'):
+        (usuario, idfilme, nota, tempo) = linha.split('\t')
+        base.setdefault(usuario, {})
+        base[usuario][filmes[idfilme]] = float(nota)
+    
+    return base
